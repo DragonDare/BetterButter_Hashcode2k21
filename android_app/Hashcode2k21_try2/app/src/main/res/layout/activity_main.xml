@@ -10,7 +10,8 @@
        android:padding="10dp"
        android:layout_width="match_parent"
        android:orientation="vertical"
-       android:layout_height="wrap_content">
+       android:layout_height="wrap_content"
+       tools:ignore="MissingConstraints">
        <LinearLayout
            android:layout_width="match_parent"
            android:padding="2dp"
@@ -21,14 +22,14 @@
                android:layout_height="match_parent"
                android:textSize="20sp"
                android:padding="2dp"
-               android:text="Discord"/>
+               android:text="@string/app1"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
 
                android:padding="2dp"
                android:id="@+id/discord_time"
-               android:text="Discord"/>
+               android:text="@string/app1"/>
 
        </LinearLayout>
        <LinearLayout
@@ -41,14 +42,14 @@
                android:layout_height="match_parent"
                android:textSize="20sp"
                android:padding="2dp"
-               android:text="Whatsapp"/>
+               android:text="@string/app2"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
 
                android:padding="2dp"
                android:id="@+id/whatsapp_time"
-               android:text="Whatsapp"/>
+               android:text="@string/app2"/>
 
        </LinearLayout>
    </LinearLayout>

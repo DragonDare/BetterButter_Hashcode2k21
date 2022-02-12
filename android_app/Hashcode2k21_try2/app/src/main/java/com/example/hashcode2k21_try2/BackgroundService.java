@@ -9,6 +9,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -20,9 +21,7 @@ public class BackgroundService extends Service {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    public BackgroundService(){
 
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -37,16 +36,20 @@ public class BackgroundService extends Service {
                 long endTime = System.currentTimeMillis();
                 long beginTime = endTime-(1000);
                 List<UsageStats> usageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, beginTime, endTime);
+                Log.d("Lmao", "Lmao");
                 if (usageStats!=null){
                     for (UsageStats usageStat:usageStats){
                         if (usageStat.getPackageName().contains("com.whatsapp")){
                             editor.putLong(WHATSAPP_COUNTER, usageStat.getTotalTimeInForeground());
+                            Log.d("W1", "lol");
                         }
                         if (usageStat.getPackageName().contains("com.discord")){
                             editor.putLong(DISCORD_COUNTER, usageStat.getTotalTimeInForeground());
+                            Log.d("D1", DISCORD_COUNTER);
                         }
                         editor.apply();
                     }
+                    Log.d("Lmao", "Lmao");
                 }
 
             }

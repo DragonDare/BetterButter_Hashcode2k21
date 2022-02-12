@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    public static String DISCORD_COUNTER = "Discord Counter";
-    public static String WHATSAPP_COUNTER = "Whatsapp Counter";
+    public static String DISCORD_COUNTER = "@string/app1 Counter";
+    public static String WHATSAPP_COUNTER = "@string/app2 Counter";
     private TextView DISCORD_view;
     private TextView whatsapp_view;
 
@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("123ac", "123ac");
         sharedPreferences= getSharedPreferences("Hashcode2k21_try2", MODE_PRIVATE);
+        Log.d("123ac", "123ac");
         if (!checkUsageStatsAllowedOrNot()){
             Intent usageAccessIntent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             usageAccessIntent.addFlags(usageAccessIntent.FLAG_ACTIVITY_NEW_TASK);
@@ -38,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 startService(new Intent(MainActivity.this, BackgroundService.class));
             }
             else{
-                Toast.makeText(getApplicationContext(), "please give access nigger", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "please give access", Toast.LENGTH_SHORT).show();
             }
         }
         else{
             startService(new Intent(MainActivity.this, BackgroundService.class));
         }
+        startService(new Intent(MainActivity.this, BackgroundService.class));
         DISCORD_view = findViewById(R.id.discord_time);
         whatsapp_view = findViewById(R.id.whatsapp_time);
         TimerTask updateView = new TimerTask(){
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         long hour = (discord_time/(1000*60*60));
                         String discord_val=hour + "h" + minute + "m" + second + "s";
                         DISCORD_view.setText(discord_val);
+                        Log.d("TestError", discord_val);
                         long whatsapp_time = sharedPreferences.getLong(WHATSAPP_COUNTER, 0);
                         second = (whatsapp_time/1000)%60;
                         minute = (whatsapp_time/1000*60)%60;
@@ -92,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         if (checkUsageStatsAllowedOrNot()){
             startService(new Intent (MainActivity.this, BackgroundService.class));
         }
+        Log.d("12abcd", "12");
         super.onDestroy();
     }
 }
+
