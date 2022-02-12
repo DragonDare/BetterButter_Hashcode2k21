@@ -42,25 +42,31 @@ def cards():
 def charts():
     return render_template("charts.html")
 
+
 @app.route('/tables')
 def tables():
     return render_template("tables.html")
+
 
 @app.route('/ForgotPassword')
 def forgot_password():
     return render_template("forgot-password.html")
 
+
 @app.route('/colors')
 def colors():
     return render_template("utilities-color.html")
+
 
 @app.route('/animation')
 def animation():
     return render_template("utilities-animation.html")
 
+
 @app.route('/border')
 def border():
     return render_template("utilities-border.html")
+
 
 @app.route('/other')
 def other():
