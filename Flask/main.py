@@ -1,11 +1,27 @@
 from flask import Flask, render_template, request
-
+from ml import generate_model, web_scrape
+import json
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    # all_goals = [
+    #     'Server Migration',
+    #     'Sales Tracking',
+    #     'Customer Database',
+    #     'Payout Details',
+    #     'Account Setup',
+    # ]
+    # all_ratings = ['10', '20', '30', '40', '100']
+    all_goals, all_ratings = generate_model()
+    all_ratings = [str((int(a)/20)*100) for a in all_ratings]
+    all_links = []
+    # all_links = [web_scrape(a, 5) for a in all_goals]
+    data = [0, 1000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000]
+    data = [str(a) for a in data]
+    data = ' '.join(data)
+    return render_template("index.html", goals=all_goals, ids=all_ratings, links=all_links, server_data=data)
 
 
 @app.route('/blank')
@@ -18,8 +34,14 @@ def not_found():
     return render_template("404.html")
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        fname = request.form["Fname"]
+        lname = request.form["Lname"]
+        first_goal = request.form["Fgoal"]
+        second_goal = request.form["Sgoal"]
+
     return render_template("login.html")
 
 
